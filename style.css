@@ -1,0 +1,485 @@
+/* ==========================================================================
+   1. GLOBALE STYLES & RESET
+   ========================================================================== */
+* {
+    box-shadow: none;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f2f7fa;
+    color: #334e68;
+    padding-bottom: 60px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ==========================================================================
+   2. APP HEADER / NAVIGATION
+   ========================================================================== */
+.app-header {
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 15px 0;
+    margin-bottom: 30px;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.app-header h1 {
+    font-size: 24px;
+    color: #102a43;
+    font-weight: 600;
+}
+
+.user-avatar {
+    font-size: 14px;
+    background: #e1effa;
+    padding: 8px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+/* ==========================================================================
+   3. LAYOUT CONTAINER & CARDS
+   ========================================================================== */
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.form-card, .list-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 10px 25px rgba(165, 195, 220, 0.2);
+    border: 1px solid #e1effa;
+}
+
+.form-card {
+    background: linear-gradient(145deg, #ffffff, #edf6fc);
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.edit-mode-active {
+    background: linear-gradient(145deg, #ffffff, #e1f0fa);
+    border-color: #62b0e8;
+}
+
+h2 {
+    font-size: 20px;
+    color: #102a43;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   4. FORMULAR GRID & INPUTS
+   ========================================================================== */
+.form-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.col-12 { flex: 0 0 100%; }
+.col-6 { flex: 0 0 calc(50% - 10px); }
+.col-3 { flex: 0 0 calc(25% - 15px); }
+
+@media (max-width: 768px) {
+    .col-6, .col-3 { flex: 0 0 100%; }
+}
+
+label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #486581;
+}
+
+input[type="text"], select, textarea, .display-only-field {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #cddbe7;
+    background-color: #ffffff;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #102a43;
+    transition: all 0.25s ease;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);
+}
+
+input[type="text"]:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #62b0e8;
+    box-shadow: 0 0 0 3px rgba(98, 176, 232, 0.2);
+}
+
+input[type="date"] {
+    padding: 10px 14px;
+    border: 1px solid #cddbe7;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #102a43;
+}
+
+.display-only-field {
+    background-color: #e1f0fa;
+    border-color: #bcccdc;
+    font-weight: 600;
+    color: #194a7a;
+}
+
+.info-icon {
+    cursor: help;
+    font-size: 14px;
+    margin-left: 3px;
+}
+
+/* ==========================================================================
+   5. INTERAKTIVE ELEMENTE (TOGGLES & SLIDER)
+   ========================================================================== */
+.toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: 5px;
+}
+
+.toggle-container span {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 46px;
+    height: 24px;
+}
+
+.switch input { display: none; }
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #bcccdc;
+    transition: .3s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px; width: 18px;
+    left: 3px; bottom: 3px;
+    background-color: white;
+    transition: .3s;
+}
+
+input:checked + .slider { background-color: #48a3e6; }
+input:checked + .slider:before { transform: translateX(22px); }
+.slider.round { border-radius: 24px; }
+.slider.round:before { border-radius: 50%; }
+
+.checkbox-group {
+    justify-content: center;
+    gap: 15px !important;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.slider-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: 8px;
+}
+
+.slider-wrapper span {
+    font-size: 12px;
+    color: #627d98;
+}
+
+input[type="range"] {
+    flex-grow: 1;
+    accent-color: #48a3e6;
+    cursor: pointer;
+}
+
+/* ==========================================================================
+   6. BUTTONS
+   ========================================================================== */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background-color: #48a3e6;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(72, 163, 230, 0.3);
+}
+
+.btn-primary:hover {
+    background-color: #2b8ccf;
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background-color: #eaeef2;
+    color: #486581;
+}
+
+.btn-secondary:hover {
+    background-color: #dbe3eb;
+}
+
+/* ==========================================================================
+   7. FILTER- & SUCHE-ANSICHT
+   ========================================================================== */
+.search-container {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.search-container input {
+    padding-left: 70px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #829ab1;
+    font-size: 13px;
+}
+
+/* ==========================================================================
+   8. TODO LISTE & ITEMS
+   ========================================================================== */
+.todo-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.no-todos {
+    text-align: center;
+    padding: 25px;
+    color: #829ab1;
+    font-style: italic;
+    background-color: #f8fafc;
+    border-radius: 10px;
+    border: 1px dashed #cddbe7;
+}
+
+.todo-item {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid #e1effa;
+    border-left-width: 6px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.todo-item:hover {
+    transform: translateX(4px);
+    box-shadow: 0 6px 15px rgba(165, 195, 220, 0.15);
+}
+
+.prio-sofort { border-left-color: #ef4e4e; background: #fff5f5; }     /* A: Wichtig + Dringend (Rot) */
+.prio-einplanen { border-left-color: #36b37e; background: #f3faf7; }  /* B: Wichtig + Nicht Dringend (Grün) */
+.prio-delegieren { border-left-color: #ffab00; background: #fffaf0; } /* C: Nicht Wichtig + Dringend (Gelb) */
+.prio-weg { border-left-color: #627d98; background: #f8fafc; }        /* D: Nicht Wichtig + Nicht Dringend (Grau) */
+
+.todo-content-left {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex-grow: 1;
+}
+
+.todo-header-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.todo-item-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #102a43;
+}
+
+.badge {
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.badge-category { background-color: #e1effa; color: #194a7a; }
+.badge-type { background-color: #eaeef2; color: #486581; }
+
+.todo-item-desc {
+    font-size: 13px;
+    color: #627d98;
+    line-height: 1.4;
+}
+
+.todo-meta-info {
+    display: flex;
+    gap: 15px;
+    font-size: 12px;
+    color: #829ab1;
+    margin-top: 4px;
+    flex-wrap: wrap;
+}
+
+.todo-progress-container {
+    width: 130px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.todo-progress-container label {
+    font-size: 12px;
+    color: #627d98;
+}
+
+.progress-bar-bg {
+    width: 100%;
+    height: 6px;
+    background-color: #eaeef2;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background-color: #48a3e6;
+    width: 0%;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.todo-actions {
+    display: flex;
+    gap: 6px;
+}
+
+.action-btn {
+    background: none;
+    border: 1px solid #cddbe7;
+    background-color: #ffffff;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 8px;
+    transition: all 0.2s;
+    font-size: 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.action-btn:hover { background-color: #eaeef2; }
+.btn-done { color: #25855a; border-color: #c6f6d5; background-color: #f0fff4; }
+.btn-done:hover { background-color: #c6f6d5; }
+.btn-edit { color: #2b6cb0; border-color: #bee3f8; background-color: #ebf8ff; }
+.btn-edit:hover { background-color: #bee3f8; }
+.btn-delete { color: #c53030; border-color: #fed7d7; background-color: #fff5f5; }
+.btn-delete:hover { background-color: #fed7d7; }
+
+/* ==========================================================================
+   9. ERLEDIGTE AUFGABEN (SPEZIAL-BEREICH)
+   ========================================================================== */
+.todo-item.is-done {
+    border-left-color: #a0aec0 !important;
+    background: #f7fafc !important;
+    box-shadow: none;
+    opacity: 0.65;
+}
+
+.todo-item.is-done .todo-item-title {
+    text-decoration: line-through;
+    color: #718096;
+}
+
+.todo-item.is-done .todo-item-desc {
+    text-decoration: line-through;
+    color: #a0aec0;
+}
+
+.todo-item.is-done .progress-bar-fill {
+    background-color: #a0aec0;
+}
+
+/* ==========================================================================
+   10. LIVE-VALIDIERUNG & FEHLERMELDUNGEN
+   ========================================================================== */
+.error-message {
+    font-size: 11px;
+    color: #ef4e4e;
+    font-weight: 500;
+    display: none;
+    margin-top: 2px;
+}
+
+.invalid input, .invalid select, .invalid textarea {
+    border-color: #ef4e4e !important;
+    background-color: #fffafd;
+}
+
+.invalid .error-message {
+    display: block;
+}

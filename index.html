@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo SPA - Eisenhower Taskmanager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="app-header">
+        <div class="header-container">
+            <h1>Todo SPA</h1>
+            <div class="user-profile">
+                <span class="user-avatar">User</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="app-container">
+        
+        <section class="form-card" id="form-section">
+            <h2 id="form-title">Neues Todo Erstellen</h2>
+            
+            <form id="todo-form" novalidate>
+                <input type="hidden" id="todo-id">
+
+                <div class="form-grid">
+                    
+                    <div class="form-group col-6">
+                        <label for="todo-title">Titel (Max. 255)</label>
+                        <input type="text" id="todo-title" maxlength="255" required placeholder="Was ist zu tun?">
+                        <span class="error-message" id="error-title">Bitte einen Titel eingeben.</span>
+                    </div>
+
+                    <div class="form-group col-3">
+                        <label for="todo-type">Event oder Task</label>
+                        <div class="toggle-container">
+                            <span class="toggle-label-left">Task</span>
+                            <label class="switch">
+                                <input type="checkbox" id="todo-type">
+                                <span class="slider round"></span>
+                            </label>
+                            <span class="toggle-label-right">Event</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-3">
+                        <label for="todo-author">Autor (Max. 20)</label>
+                        <input type="text" id="todo-author" maxlength="20" required placeholder="Dein Name">
+                        <span class="error-message" id="error-author">Name erforderlich (max. 20 Zeichen).</span>
+                    </div>
+
+                    <div class="form-group col-6">
+                        <label for="todo-description">Beschreibung</label>
+                        <textarea id="todo-description" rows="3" placeholder="Optionale Details hinzufügen..."></textarea>
+                    </div>
+
+                    <div class="form-group col-3 checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="todo-important">
+                            <span class="custom-checkbox"></span>
+                            Wichtig
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="todo-urgent">
+                            <span class="custom-checkbox"></span>
+                            Dringend
+                        </label>
+                    </div>
+
+                    <div class="form-group col-3">
+                        <label for="todo-category">Kategorie</label>
+                        <select id="todo-category" required>
+                            <option value="Sport">Sport</option>
+                            <option value="Reisen">Reisen</option>
+                            <option value="Restaurant">Restaurant</option>
+                            <option value="Arbeit">Arbeit</option>
+                            <option value="Freizeit">Freizeit</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-3">
+                        <label for="todo-startdate">Startdatum</label>
+                        <input type="date" id="todo-startdate" required>
+                        <span class="error-message" id="error-startdate">Startdatum wählen.</span>
+                    </div>
+
+                    <div class="form-group col-3">
+                        <label for="todo-enddate">Enddatum</label>
+                        <input type="date" id="todo-enddate" required>
+                        <span class="error-message" id="error-enddate">Enddatum darf nicht vor Startdatum liegen.</span>
+                    </div>
+
+                    <div class="form-group col-3">
+                        <label for="todo-progress">Prozentsatz Erledigt: <span id="progress-val">0</span>%</label>
+                        <div class="slider-wrapper">
+                            <span>0%</span>
+                            <input type="range" id="todo-progress" min="0" max="100" value="0">
+                            <span>100%</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-3">
+                        <label>Priorität (Display only) <span class="info-icon" title="Wird automatisch berechnet">(i)</span></label>
+                        <div class="display-only-field" id="todo-priority-display">Weg damit</div>
+                    </div>
+
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" id="btn-cancel" class="btn btn-secondary hidden">Abbrechen</button>
+                    <button type="submit" id="btn-submit" class="btn btn-primary">Todo Hinzufügen</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="list-card">
+            <h2>Todo Liste & Suche</h2>
+            
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Nach Todos suchen...">
+                <span class="search-icon">Suchen:</span>
+            </div>
+
+            <div class="filter-options-container" style="margin-bottom: 20px; display: flex; gap: 10px; align-items: center;">
+                <label for="sort-select" style="font-size: 13px;">Sortieren nach:</label>
+                <select id="sort-select" style="width: auto; padding: 8px 12px; font-size: 13px;">
+                    <option value="date-asc">Chronologisch (Startdatum)</option>
+                    <option value="name-asc">Autor (Anfangsbuchstabe A-Z)</option>
+                    <option value="name-desc">Autor (Anfangsbuchstabe Z-A)</option>
+                    <option value="importance">Wichtigkeit (Priorisiert nach Eisenhower)</option>
+                    <option value="progress-desc">Fortschritt (Höchster zuerst)</option>
+                </select>
+            </div>
+
+            <div class="todo-list" id="todo-container">
+                <div class="no-todos">Keine Todos gefunden. Erstelle ein neues.</div>
+            </div>
+
+            <div class="done-section" style="margin-top: 40px; border-top: 2px dashed #cddbe7; padding-top: 25px;">
+                <h3 style="font-size: 16px; color: #486581; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+                    Erledigte Aufgaben
+                </h3>
+                <div class="todo-list" id="done-container">
+                    <div class="no-todos">Noch keine Aufgaben erledigt.</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
